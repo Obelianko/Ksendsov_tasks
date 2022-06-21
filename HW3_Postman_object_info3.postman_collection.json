@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "70b953db-6fab-4530-aad7-a41fc630907f",
+		"name": "HW3_Postman_object_info3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getMethod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Отhttp://162.55.220.72:5005/object_info_3править запрос.",
+							"// 2. Статус код 200",
+							"pm.test(\"2.Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// 3. Спарсить response body в json.",
+							"let jsonData = pm.response.json();",
+							"",
+							"// 4. Спарсить request.",
+							"let req = pm.request.url.query.toObject()",
+							"// 5. Проверить, что name в ответе равно name s request (name забрать из request.)",
+							"pm.test(\"5.Response Name = request name\", function () {",
+							"     pm.expect(jsonData.name).to.eq(req.name);",
+							"});",
+							"// 6. Проверить, что age в ответе равно age s request (age забрать из request.)",
+							"pm.test(\"6.Response age = request age\", function () {",
+							"     pm.expect(jsonData.age).to.eq(req.age);",
+							"});",
+							"// 7. Проверить, что salary в ответе равно salary s request (salary забрать из request.)",
+							"pm.test(\"7.Response salary = request salary\", function () {",
+							"     pm.expect(jsonData.salary).to.eq+(req.salary);",
+							"});",
+							"// 8. Вывести в консоль параметр family из response.",
+							"console.log(jsonData.family)",
+							"// 9. Проверить, что у параметра dog есть параметры name.",
+							"pm.test(\"9. Dog has 'name'\", function () {",
+							"    pm.expect(jsonData.family.pets.dog).to.has.property('name');",
+							"});",
+							"// 10. Проверить, что у параметра dog есть параметры age.",
+							"pm.test(\"10. Dog has 'age'\", function () {",
+							"    pm.expect(jsonData.family.pets.dog).to.has.property('age');",
+							"    });",
+							"// 11. Проверить, что параметр name имеет значение Luky.",
+							"pm.test(\"11. Dog's name Luky\", function () {",
+							"    pm.expect(jsonData.family.pets.dog.name).to.deep.equal('Luky');",
+							"    });",
+							"// 12. Проверить, что параметр age имеет значение 4.",
+							"pm.test(\"11. Dog's age 4\", function () {",
+							"    pm.expect(+jsonData.family.pets.dog.age).to.deep.equal(4);",
+							"    });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3\n?age=33&salary=4000&auth_token=/s34lfgbj/None/jjd909/54031kjkWpqc1627None102256evny&name=alex",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3\n"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": "33"
+						},
+						{
+							"key": "salary",
+							"value": "4000"
+						},
+						{
+							"key": "auth_token",
+							"value": "/s34lfgbj/None/jjd909/54031kjkWpqc1627None102256evny"
+						},
+						{
+							"key": "name",
+							"value": "alex"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "75334ae4-ba63-46b6-930f-923591ffd22a",
+		"name": "HW4_Postman_object_info_4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getMethod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1. Отправить запрос.",
+							"",
+							"// 2. Статус код 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"// 3. Спарсить response body в json.",
+							"    var jsonData = pm.response.json();",
+							" ",
+							"// 4. Спарсить request.",
+							"let req = pm.request.url.query.toObject()",
+							"// 5. Проверить, что name в ответе равно name s request (name забрать из request.)",
+							"pm.test(\"5.Response Name = request name\", function () {",
+							"     pm.expect(jsonData.name).to.eq(req.name);",
+							"});",
+							"// 6. Проверить, что age в ответе равно age из request (age забрать из request.)",
+							"pm.test(\"6.Response age = request age\", function () {",
+							"     pm.expect(jsonData.age).to.eq(+req.age);",
+							"});",
+							"// 7. Вывести в консоль параметр salary из request.",
+							"console.log (req.salary)",
+							"// 8. Вывести в консоль параметр salary из response.",
+							"console.log(jsonData.salary)",
+							"// 9. Вывести в консоль 0-й элемент параметра salary из response.",
+							"console.log(jsonData.salary[0])",
+							"// 10. Вывести в консоль 1-й элемент параметра salary параметр salary из response.",
+							"console.log(jsonData.salary[1])",
+							"// 11. Вывести в консоль 2-й элемент параметра salary параметр salary из response.",
+							"console.log(jsonData.salary[2])",
+							"// 12. Проверить, что 0-й элемент параметра salary равен salary из request (salary забрать из request.)",
+							"pm.test(\"12.Response salary = request salary\", function () {",
+							"     pm.expect(jsonData.salary[0]).to.eq(+req.salary);",
+							"});",
+							"// 13. Проверить, что 1-й элемент параметра salary равен salary*2 из request (salary забрать из request.)",
+							"pm.test(\"13.Response salary1 = request salary*2\", function () {",
+							"     pm.expect(+jsonData.salary[1]).to.eq(req.salary*2);",
+							"});",
+							"// 14. Проверить, что 2-й элемент параметра salary равен salary*3 из request (salary забрать из request.)",
+							"pm.test(\"14.Response salary2 = request salary*3\", function () {",
+							"     pm.expect(+jsonData.salary[2]).to.eq(req.salary*3);",
+							"});",
+							"// 15. Создать в окружении переменную name",
+							"// через environments",
+							"let user_name = jsonData.name",
+							"// 16. Создать в окружении переменную age",
+							"let user_age = jsonData.age",
+							"// 17. Создать в окружении переменную salary",
+							"let user_salary = jsonData.salary",
+							"// 18. Передать в окружение переменную name",
+							"pm.environment.set(\"name\", \"user_name\");",
+							"// 19. Передать в окружение переменную age",
+							"pm.environment.set(\"age\", \"user_age\");",
+							"// 20. Передать в окружение переменную salary",
+							"pm.environment.set(\"salary\", \"user_salary\");",
+							"// 21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.",
+							"let salary = jsonData.salary;",
+							" for (let i = 0; i < salary; i++){",
+							"     console.log(salary)",
+							"     };",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/object_info_4?name=Alex&age=33&salary=6000&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Alex"
+						},
+						{
+							"key": "age",
+							"value": "33"
+						},
+						{
+							"key": "salary",
+							"value": "6000"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
